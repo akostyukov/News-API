@@ -7,21 +7,31 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='News',
+            name="News",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('category', models.CharField(max_length=100, verbose_name='Категория')),
-                ('header', models.CharField(max_length=255, verbose_name='Заголовок')),
-                ('text', models.TextField(max_length=1000, verbose_name='Текст')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "category",
+                    models.CharField(max_length=100, verbose_name="Категория"),
+                ),
+                ("header", models.CharField(max_length=255, verbose_name="Заголовок")),
+                ("text", models.TextField(max_length=1000, verbose_name="Текст")),
             ],
             options={
-                'verbose_name': 'Новость',
-                'verbose_name_plural': 'Новости',
+                "verbose_name": "Новость",
+                "verbose_name_plural": "Новости",
             },
         ),
     ]

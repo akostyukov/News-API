@@ -4,6 +4,6 @@ from news.views import NewsViewSet
 
 router = DefaultRouter()
 
-router.register(r'', NewsViewSet)
+router.register(r"", NewsViewSet)
 
 urlpatterns = router.urls
