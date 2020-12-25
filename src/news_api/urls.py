@@ -18,6 +18,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path("api/news/", include("news.urls")),
-    path("api/auth/", include("account.urls")),
+    path("api/auth/", include("dj_rest_auth.urls")),
+    path('api/auth/registration/', include('dj_rest_auth.registration.urls', namespace='registration')),
     path("admin/", admin.site.urls),
 ]

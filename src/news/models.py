@@ -2,9 +2,6 @@ from django.db import models
 
 
 class News(models.Model):
-    class Meta:
-        verbose_name = "Новость"
-        verbose_name_plural = "Новости"
 
     category = models.CharField("Категория", max_length=100)
     header = models.CharField("Заголовок", max_length=255)
@@ -13,3 +10,7 @@ class News(models.Model):
 
     def __str__(self):
         return f"{self.header} - {self.date_time}"
+
+    class Meta:
+        verbose_name = "Новость"
+        verbose_name_plural = "Новости"

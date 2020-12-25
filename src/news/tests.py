@@ -26,8 +26,6 @@ class NewsAPITestCase(APITestCase):
         self.assertEqual(data, response.data)
 
     def test_create(self):
-        self.assertEqual(2, News.objects.all().count())
-
         url = reverse("news-list")
 
         data = json.dumps(
