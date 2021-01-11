@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build:
+      context: ../
+      dockerfile: deploy/Dockerfile
+    command: bash -c "python src/manage.py migrate &&
+              python src/manage.py collectstatic --noinput &&
+              cd src/ &&
+              gunicorn news_api.wsgi:application --bind 0.0.0.0:8000"
+    expose:
+      - 8000
+    volumes:
+      - static_volume:/news-api/src/static
+      - media_volume:/news-api/src/media
+    depends_on:
+      - db
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/news-api/src/static
+      - media_volume:/news-api/src/media
+    ports:
+      - 8000:80
+    depends_on:
+      - web
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    volumes:
+      - rabbitmq_data
+    ports:
+      - 5672:5672
+      - 15672:15672
+volumes:
+  static_volume:
+  media_volume:

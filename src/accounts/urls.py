@@ -1,6 +1,6 @@
-from django.urls import path, include
+from django.urls import include, path
 
 urlpatterns = [
-    path('', include('dj_rest_auth.urls')),
-    path('registration/', include('dj_rest_auth.registration.urls')),
+    path("", include("dj_rest_auth.urls")),
+    path("registration/", include("dj_rest_auth.registration.urls")),
 ]

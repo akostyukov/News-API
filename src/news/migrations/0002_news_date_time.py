@@ -6,14 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0001_initial'),
+        ("news", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='news',
-            name='date_time',
-            field=models.CharField(default='2020-12-20 13:45', max_length=200, verbose_name='Дата и время публикации'),
+            model_name="news",
+            name="date_time",
+            field=models.CharField(
+                default="2020-12-20 13:45",
+                max_length=200,
+                verbose_name="Дата и время публикации",
+            ),
             preserve_default=False,
         ),
     ]

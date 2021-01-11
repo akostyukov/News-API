@@ -11,10 +11,16 @@ from news.serializers import NewsSerializer
 class NewsAPITestCase(APITestCase):
     def setUp(self):
         self.news_1 = News.objects.create(
-            category="Криминал", header="Заголовок 1 новости", text="Текст 1 новости", date_time='2020.12.25 13:30'
+            category="Криминал",
+            header="Заголовок 1 новости",
+            text="Текст 1 новости",
+            date_time="2020.12.25 13:30",
         )
         self.news_2 = News.objects.create(
-            category="Культура", header="Заголовок 2 новости", text="Текст 2 новости", date_time='2020.12.22 08:05'
+            category="Культура",
+            header="Заголовок 2 новости",
+            text="Текст 2 новости",
+            date_time="2020.12.22 08:05",
         )
 
     def test_get(self):
@@ -33,7 +39,7 @@ class NewsAPITestCase(APITestCase):
                 "category": "Из жизни",
                 "header": "Заголовок новости из жизни",
                 "text": "Текст новости из жизни",
-                "date_time": "2020.12.20 15:35"
+                "date_time": "2020.12.20 15:35",
             }
         )
 
@@ -50,7 +56,7 @@ class NewsAPITestCase(APITestCase):
                 "category": self.news_1.category,
                 "header": "Абсолютно новый заголовок",
                 "text": self.news_1.text,
-                "date_time": self.news_1.date_time
+                "date_time": self.news_1.date_time,
             }
         )
 
