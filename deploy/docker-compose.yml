@@ -31,6 +31,14 @@ services:
       - 8000:80
     depends_on:
       - web
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    volumes:
+      - rabbitmq_data
+    ports:
+      - 5672:5672
+      - 15672:15672
 volumes:
   static_volume:
   media_volume:
