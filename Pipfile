@@ -42,6 +42,8 @@ virtualenv = "==20.2.2"
 virtualenv-clone = "==0.5.4"
 Django = "==3.1.5"
 PyJWT = "==2.0.0"
+django-rest-swagger = "*"
+drf-yasg = "*"
 
 [dev-packages]
 
