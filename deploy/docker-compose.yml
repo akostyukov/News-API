@@ -1,3 +1,5 @@
+version: '3.9'
+
 services:
   db:
     image: postgres
@@ -9,27 +11,26 @@ services:
     build:
       context: ../
       dockerfile: deploy/Dockerfile
-    command: bash -c "python src/manage.py migrate &&
-              python src/manage.py collectstatic --noinput &&
-              cd src/ &&
+    command: bash -c "cd src/ &&
+              python manage.py migrate &&
+              python manage.py collectstatic --noinput &&
               gunicorn news_api.wsgi:application --bind 0.0.0.0:8000"
     expose:
       - 8000
-    ports:
-      - 8000:8000
     volumes:
       - static_volume:/news-api/src/static
       - media_volume:/news-api/src/media
     depends_on:
       - db
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    container_name: rabbitmq
+  nginx:
+    build: ./nginx
     volumes:
-      - rabbitmq_data
+      - static_volume:/news-api/src/static
+      - media_volume:/news-api/src/media
     ports:
-      - 5672:5672
-      - 15672:15672
+      - 8000:80
+    depends_on:
+      - web
 volumes:
   static_volume:
   media_volume:
