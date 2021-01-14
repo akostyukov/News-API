@@ -25,6 +25,7 @@ api_urls = [
     path('docs/', schema_view.with_ui()),
     path("news/", include("news.urls")),
     path("auth/", include("accounts.urls")),
+    path('silk/', include('silk.urls')),
 ]
 
 urlpatterns = [
