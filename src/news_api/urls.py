@@ -19,13 +19,13 @@ from django.urls import include, path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 
-schema_view = get_schema_view(openapi.Info(title="News API", default_version='v1'))
+schema_view = get_schema_view(openapi.Info(title="News API", default_version="v1"))
 
 api_urls = [
-    path('docs/', schema_view.with_ui()),
+    path("docs/", schema_view.with_ui()),
     path("news/", include("news.urls")),
     path("auth/", include("accounts.urls")),
-    path('silk/', include('silk.urls')),
+    path("silk/", include("silk.urls")),
 ]
 
 urlpatterns = [
