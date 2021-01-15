@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from news.models import News, Comment
+from news.models import Comment, News
 
 
 class CommentSerializer(ModelSerializer):
@@ -10,8 +10,6 @@ class CommentSerializer(ModelSerializer):
 
 
 class NewsSerializer(ModelSerializer):
-    comments = CommentSerializer(many=True)
-
     class Meta:
         model = News
-        fields = ['comments']
+        fields = "__all__"

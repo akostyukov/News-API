@@ -23,7 +23,7 @@ schema_view = get_schema_view(openapi.Info(title="News API", default_version="v1
 
 api_urls = [
     path("docs/", schema_view.with_ui()),
-    path("news/", include("news.urls")),
+    path("", include("news.urls")),
     path("auth/", include("accounts.urls")),
     path("silk/", include("silk.urls")),
 ]
