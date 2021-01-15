@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "dj_rest_auth",
     "drf_yasg",
     "silk",
+    "django_filters",
     "news",
     "accounts",
 ]
@@ -103,6 +104,11 @@ DATABASES = {
         "HOST": "db",
         "PORT": 5432,
     }
+}
+
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 1,
 }
 
 # Password validation

@@ -46,6 +46,7 @@ django-rest-swagger = "*"
 drf-yasg = "*"
 sentry-sdk = "*"
 django-silk = "*"
+django-filter = "*"
 
 [dev-packages]
 
