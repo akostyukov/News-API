@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
 from django.contrib import admin
 from django.urls import include, path
 from drf_yasg import openapi
@@ -28,7 +27,11 @@ api_urls = [
     path("silk/", include("silk.urls")),
 ]
 
-urlpatterns = [
-    path("api/", include(api_urls)),
+urls_v1 = [
+    path("api/", include(api_urls), name="api"),
     path("admin/", admin.site.urls),
+]
+
+urlpatterns = [
+    path("v1/", include(urls_v1, namespace="v1")),
 ]
