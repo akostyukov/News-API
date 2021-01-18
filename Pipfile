@@ -47,6 +47,9 @@ drf-yasg = "*"
 sentry-sdk = "*"
 django-silk = "*"
 django-filter = "*"
+pip = "*"
+install = "*"
+drf-nested-routers = "*"
 
 [dev-packages]
 

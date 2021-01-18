@@ -7,6 +7,9 @@ class News(models.Model):
     header = models.CharField("Заголовок", max_length=255)
     text = models.TextField("Текст", max_length=1000)
     date_time = models.CharField("Дата и время публикации", max_length=200)
+    likes = models.ManyToManyField(
+        User, blank=True, related_name="likes", verbose_name="Оценили"
+    )
     comments = models.ManyToManyField(
         User,
         blank=True,
