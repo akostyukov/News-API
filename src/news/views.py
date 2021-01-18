@@ -5,14 +5,28 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from news.models import Comment, News
+from news.permissions import IsOwnerOrStaffOrReadOnly
 from news.serializers import CommentSerializer, NewsSerializer
 
 
 class CommentViewSet(ModelViewSet):
     serializer_class = CommentSerializer
+    permission_classes_by_action = {
+        "partial_update": [IsOwnerOrStaffOrReadOnly],
+        "destroy": [IsOwnerOrStaffOrReadOnly],
+    }
 
     def get_queryset(self):
         return Comment.objects.filter(news=self.kwargs["news_pk"])
+
+    def get_permissions(self):
+        try:
+            return [
+                permission()
+                for permission in self.permission_classes_by_action[self.action]
+            ]
+        except KeyError:
+            return [permission() for permission in self.permission_classes]
 
 
 class NewsViewSet(ModelViewSet):
