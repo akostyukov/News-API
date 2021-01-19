@@ -4,8 +4,8 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from news.models import News
-from news.serializers import NewsSerializer
+from v1.news.models import News
+from v1.news.serializers import NewsSerializer
 
 
 class NewsAPITestCase(APITestCase):

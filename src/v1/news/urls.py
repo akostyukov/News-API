@@ -1,7 +1,7 @@
 from rest_framework.routers import SimpleRouter
 from rest_framework_nested.routers import NestedSimpleRouter
 
-from news.views import CommentViewSet, NewsViewSet
+from v1.news.views import CommentViewSet, NewsViewSet
 
 router = SimpleRouter()
 router.register(r"news", NewsViewSet, basename="news")

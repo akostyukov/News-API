@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include, path
 from drf_yasg import openapi
@@ -21,13 +20,15 @@ from drf_yasg.views import get_schema_view
 
 schema_view = get_schema_view(openapi.Info(title="News API", default_version="v1"))
 
-api_urls = [
-    path("", include("news.urls")),
+v1_urls = [
+    path("", include("v1.news.urls")),
     path("docs/", schema_view.with_ui()),
-    path("auth/", include("accounts.urls")),
+    path("auth/", include("v1.accounts.urls")),
 ]
 
-api_version = [url(r"(?P<version>\w+)/", include(api_urls))]
+api_version = [
+    path("v1/", include(v1_urls)),
+]
 
 urlpatterns = [
     path("api/", include(api_version)),

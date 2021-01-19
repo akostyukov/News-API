@@ -4,9 +4,9 @@ from rest_framework.filters import SearchFilter
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from news.models import Comment, News
-from news.permissions import IsOwnerOrStaffOrReadOnly
-from news.serializers import CommentSerializer, NewsSerializer
+from v1.news.models import Comment, News
+from v1.news.permissions import IsOwnerOrStaffOrReadOnly
+from v1.news.serializers import CommentSerializer, NewsSerializer
 
 
 class CommentViewSet(ModelViewSet):
