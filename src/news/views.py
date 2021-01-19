@@ -17,7 +17,6 @@ class CommentViewSet(ModelViewSet):
     }
 
     def get_queryset(self):
-        print(self.request.version)
         return Comment.objects.filter(news=self.kwargs["news_pk"])
 
     def get_permissions(self):
