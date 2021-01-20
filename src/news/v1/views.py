@@ -16,6 +16,10 @@ class CommentViewSet(ModelViewSet):
     def get_queryset(self):
         return Comment.objects.filter(news=self.kwargs["news_pk"])
 
+    def partial_update(self, request, *args, **kwargs):
+        request.data["edited"] = True
+        return super().partial_update(request, *args, **kwargs)
+
 
 class NewsViewSet(ModelViewSet):
     serializer_class = NewsSerializer

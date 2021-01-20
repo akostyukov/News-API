@@ -36,6 +36,7 @@ class Comment(models.Model):
     author = models.ForeignKey(User, verbose_name="Автор", on_delete=models.CASCADE)
     text = models.TextField("Текст", max_length=1000)
     news = models.ForeignKey(News, verbose_name="Новость", on_delete=models.CASCADE)
+    edited = models.BooleanField(verbose_name="Изменялось", default=False)
 
     def __str__(self):
         return (
