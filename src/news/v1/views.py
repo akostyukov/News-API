@@ -21,7 +21,7 @@ class CommentViewSet(ModelViewSet):
         return Comment.objects.filter(news=self.kwargs["news_pk"])
 
     def update(self, request, *args, **kwargs):
-        request.data.update({"edited": True})
+        request.data["edited"] = True
         return super().update(request, *args, **kwargs)
 
 
