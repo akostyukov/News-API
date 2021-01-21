@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "silk",
     "django_filters",
+    "cachalot",
     "news",
     "accounts",
 ]
