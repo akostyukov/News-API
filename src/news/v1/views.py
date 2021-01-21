@@ -45,9 +45,7 @@ class NewsViewSet(ModelViewSet):
     @action(detail=True, methods=["get"], url_path="likes")
     def get_likes(self, request, pk=None):
         news = News.objects.get(id=pk)
-        return Response(
-            {"likes": [f"{user.username}({user.id})" for user in news.likes.all()]}
-        )
+        return Response({"likes": [user.username for user in news.likes.all()]})
 
     def get_serializer_class(self):
         serializer_class = self.serializer_class
