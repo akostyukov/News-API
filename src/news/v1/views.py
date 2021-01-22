@@ -26,7 +26,7 @@ class CommentViewSet(ModelViewSet):
 
 class NewsViewSet(ModelViewSet):
     serializer_class = NewsSerializer
-    queryset = News.objects.all()
+    queryset = News.objects.all().prefetch_related("likes", "comments")
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filter_fields = ["category", "date_time"]
     search_fields = ["header"]
