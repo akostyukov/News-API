@@ -10,6 +10,14 @@ services:
     networks:
       - rabbitNetwork
 
+  redis:
+    image: redis
+    hostname: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - rabbitNetwork
+
   web:
     build:
       context: ../
@@ -25,6 +33,8 @@ services:
       - media_volume:/news-api/src/media
     depends_on:
       - db
+      - redis
+      - rabbitmq
     networks:
       - rabbitNetwork
 
@@ -43,9 +53,24 @@ services:
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
     ports:
       - 5672:5672
       - 15672:15672
+    networks:
+      - rabbitNetwork
+
+  worker:
+    build:
+      context: ../
+      dockerfile: deploy/Dockerfile
+    command: bash -c "cd src && celery -A news_api worker -B -l INFO"
+    depends_on:
+      - db
+      - redis
+      - rabbitmq
     networks:
       - rabbitNetwork
 
