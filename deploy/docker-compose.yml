@@ -66,7 +66,7 @@ services:
     build:
       context: ../
       dockerfile: deploy/Dockerfile
-    command: bash -c "cd src && celery -A news_api worker -B -l INFO"
+    command: bash -c "cd src && celery -A news_api worker -B -l INFO -Q tasks_news"
     depends_on:
       - db
       - redis

@@ -22,6 +22,16 @@ sentry_sdk.init(
     traces_sample_rate=1.0,
 )
 
+CELERY_TASK_ROUTES = {
+    "news.tasks.send_hash": {
+        "queue": "tasks_news",
+    },
+    "news.tasks.fresh_news_save": {
+        "queue": "tasks_news",
+    },
+}
+
+
 CELERY_BEAT_SCHEDULE = {
     "hour-news-send": {
         "task": "news.tasks.send_hash",

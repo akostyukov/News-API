@@ -53,6 +53,7 @@ drf-nested-routers = "*"
 django-cachalot = "*"
 celery = "*"
 django-redis = "*"
+python-memcached = "*"
 
 [dev-packages]
 
