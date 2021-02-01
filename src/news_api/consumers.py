@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from celery import bootsteps
 from kombu import Consumer
 
