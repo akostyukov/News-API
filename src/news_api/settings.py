@@ -35,7 +35,7 @@ CELERY_TASK_ROUTES = {
 CELERY_BEAT_SCHEDULE = {
     "hour-news-send": {
         "task": "news.tasks.send_hash",
-        "schedule": crontab(),
+        "schedule": crontab(hour='*/1'),
     },
 }
 
