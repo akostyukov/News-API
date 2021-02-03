@@ -13,3 +13,10 @@ class NewsSerializer(ModelSerializer):
     class Meta:
         model = News
         fields = "__all__"
+
+
+class NewsWithoutEditingSerializer(ModelSerializer):
+    class Meta:
+        model = News
+        fields = "__all__"
+        read_only_fields = ["header", "category"]

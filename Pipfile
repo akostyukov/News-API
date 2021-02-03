@@ -50,6 +50,7 @@ django-filter = "*"
 pip = "*"
 install = "*"
 drf-nested-routers = "*"
+django-cachalot = "*"
 
 [dev-packages]
 

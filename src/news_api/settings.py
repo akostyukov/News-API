@@ -55,8 +55,9 @@ INSTALLED_APPS = [
     "drf_yasg",
     "silk",
     "django_filters",
-    'news',
-    'accounts',
+    "cachalot",
+    "news",
+    "accounts",
 ]
 
 SITE_ID = 1

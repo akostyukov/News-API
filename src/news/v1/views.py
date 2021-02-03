@@ -6,7 +6,11 @@ from rest_framework.viewsets import ModelViewSet
 
 from news.models import Comment, News
 from news.permissions import IsOwnerOrStaffOrReadOnly
-from news.serializers import CommentSerializer, NewsSerializer
+from news.serializers import (
+    CommentSerializer,
+    NewsSerializer,
+    NewsWithoutEditingSerializer,
+)
 
 
 class CommentViewSet(ModelViewSet):
@@ -15,6 +19,9 @@ class CommentViewSet(ModelViewSet):
 
     def get_queryset(self):
         return Comment.objects.filter(news=self.kwargs["news_pk"])
+
+    def perform_update(self, serializer):
+        serializer.save(edited=True)
 
 
 class NewsViewSet(ModelViewSet):
@@ -34,3 +41,11 @@ class NewsViewSet(ModelViewSet):
         else:
             news.likes.add(self.request.user)
             return Response({"success": "Like has been set"})
+
+    def get_serializer_class(self):
+        serializer_class = self.serializer_class
+
+        if self.request.method == "PUT" or self.request.method == "PATCH":
+            serializer_class = NewsWithoutEditingSerializer
+
+        return serializer_class
