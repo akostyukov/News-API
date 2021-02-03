@@ -55,8 +55,8 @@ INSTALLED_APPS = [
     "drf_yasg",
     "silk",
     "django_filters",
-    "news",
-    "accounts",
+    'news',
+    'accounts',
 ]
 
 SITE_ID = 1
@@ -109,7 +109,6 @@ DATABASES = {
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 10,
-    "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.URLPathVersioning",
 }
 
 
