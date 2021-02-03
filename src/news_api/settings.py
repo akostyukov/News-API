@@ -33,7 +33,7 @@ SECRET_KEY = "wj2-tp6t+b(x4)t-tkr=8=(bu^xq7l6@qu))g4ro8kucwb1d8+"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
 # Application definition
 

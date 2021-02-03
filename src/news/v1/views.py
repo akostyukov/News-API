@@ -26,7 +26,7 @@ class CommentViewSet(ModelViewSet):
 
 class NewsViewSet(ModelViewSet):
     serializer_class = NewsSerializer
-    queryset = News.objects.all()
+    queryset = News.objects.all().prefetch_related("likes", "comments")
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filter_fields = ["category", "date_time"]
     search_fields = ["header"]
@@ -41,6 +41,11 @@ class NewsViewSet(ModelViewSet):
         else:
             news.likes.add(self.request.user)
             return Response({"success": "Like has been set"})
+
+    @action(detail=True, methods=["get"], url_path="likes")
+    def get_likes(self, request, pk=None):
+        news = News.objects.get(id=pk)
+        return Response({"likes": [user.username for user in news.likes.all()]})
 
     def get_serializer_class(self):
         serializer_class = self.serializer_class
