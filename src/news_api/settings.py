@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 
 import sentry_sdk
+from celery.schedules import crontab
 from sentry_sdk.integrations.django import DjangoIntegration
 
 sentry_sdk.init(
@@ -20,6 +21,23 @@ sentry_sdk.init(
     integrations=[DjangoIntegration()],
     traces_sample_rate=1.0,
 )
+
+CELERY_TASK_ROUTES = {
+    "news.tasks.send_hash": {
+        "queue": "tasks_news",
+    },
+    "news.tasks.fresh_news_save": {
+        "queue": "tasks_news",
+    },
+}
+
+
+CELERY_BEAT_SCHEDULE = {
+    "hour-news-send": {
+        "task": "news.tasks.send_hash",
+        "schedule": crontab(minute="0", hour="*/1"),
+    },
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -59,6 +77,16 @@ INSTALLED_APPS = [
     "news",
     "accounts",
 ]
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/0",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}
 
 SITE_ID = 1
 
@@ -111,7 +139,6 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 10,
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

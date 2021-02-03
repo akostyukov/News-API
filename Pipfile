@@ -51,6 +51,8 @@ pip = "*"
 install = "*"
 drf-nested-routers = "*"
 django-cachalot = "*"
+celery = "*"
+django-redis = "*"
 
 [dev-packages]
 
