@@ -1,12 +1,18 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
+
+tz = timezone.get_default_timezone()
 
 
 class News(models.Model):
     category = models.CharField("Категория", max_length=100)
     header = models.CharField("Заголовок", max_length=255)
     text = models.TextField("Текст", max_length=1000)
-    date_time = models.CharField("Дата и время публикации", max_length=200)
+    date_time = models.DateTimeField("Дата и время публикации")
+    likes = models.ManyToManyField(
+        User, blank=True, related_name="likes", verbose_name="Оценили"
+    )
     comments = models.ManyToManyField(
         User,
         blank=True,
@@ -16,7 +22,10 @@ class News(models.Model):
     )
 
     def __str__(self):
-        return f"{self.header} - {self.date_time}"
+        return f"{self.header} - {self.get_date_time()}"
+
+    def get_date_time(self):
+        return self.date_time.astimezone(tz).strftime("%d.%m.%Y %H:%M")
 
     class Meta:
         verbose_name = "Новость"
